@@ -146,7 +146,7 @@ async function parseProjectPackages(projectDirectory) {
     if (!dependencies.includes('sails') && !devDependencies.includes('sails')) {
         vanity.logWarning(
             `The active project (${projectPackage.name}) has no sails dependency listed!`,
-            '\nIt is recommended that you run an `npm install sails@beta --save`, so this project may function without a global sails installation.'
+            '\nIt is recommended that you run an `npm install sails --save`, so this project may function without a global sails installation.'
         );
     }
 
