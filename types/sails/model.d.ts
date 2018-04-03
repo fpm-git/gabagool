@@ -251,7 +251,7 @@ declare abstract class $ailsModelPubSub<T> {
 
 }
 
-export declare abstract class $ailsModel<T> extends $ailsModelPubSub<T> {
+export declare abstract class $ailsModel<T, TSearch, TComplete> extends $ailsModelPubSub<T> {
 
   tableName: string;
 
@@ -282,7 +282,7 @@ export declare abstract class $ailsModel<T> extends $ailsModelPubSub<T> {
    * @param criteria - Records which match this Waterline criteria will be archived. Be warned, if you specify
    * an empty dictionary ({}) as your criteria, all records will be destroyed!
    */
-  abstract archive(criteria: Object): ModelQueryChain<T[], void>;
+  abstract archive(criteria: TSearch): ModelQueryChain<T[], void>;
 
   /**
    * Get the aggregate mean of the specified attribute across all matching records.
@@ -292,7 +292,7 @@ export declare abstract class $ailsModel<T> extends $ailsModelPubSub<T> {
    * specified, the average will be computed across all of this model's records. avg queries do not support
    * pagination using skip and limit or projections using select.
    */
-  abstract avg(numericAttrName: string, criteria?: Object): ModelQueryChain<number, number>;
+  abstract avg(numericAttrName: string, criteria?: TSearch): ModelQueryChain<number, number>;
 
   /**
    * Get the total number of records matching the specified criteria.
@@ -300,7 +300,7 @@ export declare abstract class $ailsModel<T> extends $ailsModelPubSub<T> {
    * @param criteria - The Waterline criteria to use for matching records in the database. Note that count
    * queries do not support pagination using skip and limit or projections using select.
    */
-  abstract count(criteria?: Object): ModelQueryChain<number, number>;
+  abstract count(criteria?: TSearch): ModelQueryChain<number, number>;
 
   /**
    * Create a record in the database.
@@ -312,7 +312,7 @@ export declare abstract class $ailsModel<T> extends $ailsModelPubSub<T> {
    * @param initialValues - The initial values for the new record. (Note that, if this model is in "schemaful"
    * mode, then any extraneous keys will be silently omitted.)
    */
-  abstract create(initialValues: Object): ModelQueryChain<T, void>;
+  abstract create(initialValues: TComplete): ModelQueryChain<T, void>;
 
   /**
    * Create a set of records in the database.
@@ -323,7 +323,7 @@ export declare abstract class $ailsModel<T> extends $ailsModelPubSub<T> {
    *
    * @param initialValues - An array of dictionaries with attributes for the new records.
    */
-  abstract createEach(initialValues: Object[]): ModelQueryChain<T[], void>;
+  abstract createEach(initialValues: TComplete[]): ModelQueryChain<T[], void>;
 
   /**
    * Destroy records in your database that match the given criteria.
@@ -336,14 +336,14 @@ export declare abstract class $ailsModel<T> extends $ailsModelPubSub<T> {
    * empty dictionary ({}) as your criteria, all records will be destroyed! destroy queries do not support pagination
    * using skip and limit or projections using select.
    */
-  abstract destroy(criteria: Object): ModelQueryChain<T[], void>;
+  abstract destroy(criteria: TSearch): ModelQueryChain<T[], void>;
 
   /**
    * Find records in your database that match the given criteria.
    *
    * @param criteria - The Waterline criteria to use for matching records in the database.
    */
-  abstract find(criteria: Object): ModelQueryChain<T[], T[]>;
+  abstract find(criteria: TSearch): ModelQueryChain<T[], T[]>;
 
   /**
    * Attempt to find a particular record in your database that matches the given criteria.
@@ -353,7 +353,7 @@ export declare abstract class $ailsModel<T> extends $ailsModelPubSub<T> {
    *
    * findOne queries do not support pagination using skip or limit.
    */
-  abstract findOne(criteria: Object): ModelQueryChain<T | void, T | void>;
+  abstract findOne(criteria: TSearch): ModelQueryChain<T | void, T | void>;
 
   /**
    * Find the record matching the specified criteria. If no such record exists, create one using the provided
@@ -363,7 +363,7 @@ export declare abstract class $ailsModel<T> extends $ailsModelPubSub<T> {
    * criteria should always match exactly zero or one records in the database.
    * @param initialValues - The initial values for the new record, if one is created.
    */
-  abstract findOrCreate(criteria: Object, initialValues: Object): ModelWasCreatedExecQueryChain<T>;
+  abstract findOrCreate(criteria: TSearch, initialValues: TComplete): ModelWasCreatedExecQueryChain<T>;
 
   /**
    * Access the datastore for a particular model.
@@ -408,7 +408,7 @@ export declare abstract class $ailsModel<T> extends $ailsModelPubSub<T> {
    *
    * @param criteria - The Waterline criteria to use for matching records in the database.
    */
-  abstract stream(criteria: Object): ModelStreamableQueryChain<T>;
+  abstract stream(criteria: TSearch): ModelStreamableQueryChain<T>;
 
   /**
    * Get the aggregate sum of the specified attribute across all matching records.
@@ -418,7 +418,7 @@ export declare abstract class $ailsModel<T> extends $ailsModelPubSub<T> {
    * specified, the sum will be computed across all of this model's records. sum queries do not support pagination
    * using skip and limit or projections using select.
    */
-  abstract sum(numericAttrName: number, criteria?: Object): ModelQueryChain<number, number>;
+  abstract sum(numericAttrName: number, criteria?: TSearch): ModelQueryChain<number, number>;
 
   /**
    * Update all records matching the given criteria.
@@ -433,6 +433,6 @@ export declare abstract class $ailsModel<T> extends $ailsModelPubSub<T> {
    * be updated to have. (Note that, if this model is in "schemaful" mode, then any extraneous keys will be
    * silently omitted.)
    */
-  abstract update(criteria: Object, valuesToSet: Object): ModelQueryChain<T[], void>;
+  abstract update(criteria: TSearch, valuesToSet: TSearch): ModelQueryChain<T[], void>;
 
 }
