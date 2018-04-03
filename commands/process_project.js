@@ -154,8 +154,8 @@ async function parseProjectPackages(projectDirectory) {
     const hooksDev = await extractHookDependencies(devDependencies, projectDirectory);
     const allHooks = hooks.concat(hooksDev);    // essentially hooksDev below
 
-    // toss an error if we've imported any marlin hook in normal dependencies
-    if (hooks.length > 0) {
+    // toss an error if we've imported any marlin hook in normal dependencies of a hook
+    if (projectPackage.sails && projectPackage.sails.isHook && (hooks.length > 0)) {
         throw `Found Marlinspike-based "${hooks[0].name}" within package dependencies. Please install all Marlinspike hooks as devDependencies instead.`;
     }
 
