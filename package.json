@@ -1,6 +1,6 @@
 {
   "name": "gabagool",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Gabagool: because languages are sometimes hard, especially if you've magical program-wide globals. Gabagool: because sometimes, the wrong way is the write way™. \n\n This module handles generating global definition files for the models and controllers in your Sails app. Reclaim those additional monitors with Intellisense! No longer will you have to keep separate windows open just for viewing definitions side-by-side, hoorah!",
   "main": "main.js",
   "scripts": {
